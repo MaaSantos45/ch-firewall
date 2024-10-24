@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-        echo "sudo $0 [opts]"
+        echo "Usage: sudo $0 [opts]"
         echo
         echo "This script make changes in iptables, then show the RULES of all chains"
         echo
