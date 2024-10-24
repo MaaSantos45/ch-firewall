@@ -3,7 +3,7 @@
 usage() {
         echo "Usage: $0 <ips_file>"
         echo
-        echo "this script remove ':None' from ips_file"
+        echo "this script remove ':None' or the '<fake_ip>, <real_ip>' from ips_file"
         echo
 }
 
@@ -16,7 +16,11 @@ fi
 
 for ip in $(cat "$1");do
         if [ "$ip" != "ip_usuario" ];then
-                echo "$ip" | sed "s/:None//g" >> ips_noport.txt
+                if [[ "$ip" == *","* ]]; then
+                        echo "$ip" | cut -d',' -f2 | sed 's/^ //g' >> ips_noport.txt
+                else
+                        echo "$ip" | sed "s/:None//g" >> ips_noport.txt
+                fi
         fi
 done
 
